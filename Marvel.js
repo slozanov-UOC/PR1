@@ -102,6 +102,14 @@ class Thumbnail {
     const sum = comics.reduce((total, comic) => total + comic.price, 0);
     return sum / comics.length;
   }
+
+  function getAffordableComicTitles(comics, maxPrice) {
+    //filtra els còmics pel preu màxim i despres extreu els títols.
+    const affordableTitles = comics
+    .filter(comic => comic.price <= maxPrice)
+    .map(comic => comic.title);
+    return affordableTitles;
+  }
   
   // Crea dades d'exemple de Comic
   const sampleComic1 = new Comic(123, "Amazing Fantasy #15", 15, "The first appearance of Spider-Man!", 32, new Thumbnail("http://example.com/path/to/image1", "jpg"), 3.99, ["Stan Lee", "Steve Ditko"], ["Spider-Man", "Aunt May"]);
@@ -153,3 +161,7 @@ class Thumbnail {
   //Provant la funció calculateAveragePrice
   const averagePrice = calculateAveragePrice(myFavorites.favoriteComics);
   console.log("Preu mitjà dels còmics:", averagePrice);
+
+  //Provant la funció getAffordableComicTitles
+  const affordableComics = getAffordableComicTitles(myFavorites.favoriteComics, 4.00);
+  console.log("Còmics per sota de 4.00€:", affordableComics);
