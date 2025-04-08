@@ -71,6 +71,7 @@ class Thumbnail {
         this.favoriteComics.forEach(comic => console.log(comic));
       }
     }
+
     addMultipleFavorites(...comics) {
       // Afegeix múltiples còmics a la llista de favorits utilitzant  l'operador rest
       this.favoriteComics.push(...comics);
@@ -80,6 +81,26 @@ class Thumbnail {
       // Realitza una còpia de la llista favorits
       return [...this.favoriteComics];
     }
+  }
+
+  //Funció recursiva per a cercar un còmic per ID
+  function findComicByID(id, index = 0, favorites) {
+    if (index >= favorites.length) {
+      return null; //còmic no trobat
+    }
+    if (favorites[index].id === id) {
+      return favorites[index];
+    }
+    return findComicByID(id, index + 1, favorites);
+  }
+
+  // Calcula el preu mitjà dels còmics favorits
+  function calculateAveragePrice(comics) {
+    if (comics.length === 0) {
+      return 0;
+    }
+    const sum = comics.reduce((total, comic) => total + comic.price, 0);
+    return sum / comics.length;
   }
   
   // Crea dades d'exemple de Comic
@@ -124,3 +145,11 @@ class Thumbnail {
   
   console.log("Hero Name:", sampleHero.name);
   console.log("Thumbnail URL:", sampleHero.getThumbnailURL());
+
+  // Provant la funció calculateAveragePrice
+  const foundComic = findComicByID(789, 0, myFavorites.favoriteComics);
+  console.log("Còmic trobat per ID 789:", foundComic);
+
+  //Provant la funció calculateAveragePrice
+  const averagePrice = calculateAveragePrice(myFavorites.favoriteComics);
+  console.log("Preu mitjà dels còmics:", averagePrice);
