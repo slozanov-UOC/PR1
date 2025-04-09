@@ -1,8 +1,8 @@
 // Representa la miniatura d'un còmic
 class Thumbnail {
-    constructor(path, extension) {
-      this.path = path; // Ruta de la imatge
-      this.extension = extension; // Extensió de la imatge
+  constructor(path, extension) {
+    this.path = path; // Ruta de la imatge
+    this.extension = extension; // Extensió de la imatge
     }
     getThumbnailURL() {
       // Retorna la URL completa de la miniatura
@@ -71,16 +71,16 @@ class Thumbnail {
         this.favoriteComics.forEach(comic => console.log(comic));
       }
     }
+  }
 
-    addMultipleFavorites(...comics) {
-      // Afegeix múltiples còmics a la llista de favorits utilitzant  l'operador rest
-      this.favoriteComics.push(...comics);
-    }
-  
-    copyFavorites() {
-      // Realitza una còpia de la llista favorits
-      return [...this.favoriteComics];
-    }
+  // Afegeix múltiples còmics a un array utilitzant l'operador rest
+  function addMultipleFavorites(targetArray, ...comicsToAdd) {
+    targetArray.push(...comicsToAdd);
+  }
+
+  // Realitza una còpia d'un array utilitzant l'operador spread
+  function copyFavorites(sourceArray) {
+    return [...sourceArray];
   }
 
   //Funció recursiva per a cercar un còmic per ID
@@ -121,7 +121,7 @@ class Thumbnail {
   
   // Afegeix còmics a la llista de favorits
   myFavorites.addFavorite(sampleComic1);
-  myFavorites.addMultipleFavorites(sampleComic2, sampleComic3);
+  addMultipleFavorites(myFavorites.favoriteComics, sampleComic2, sampleComic3);
   
   // Mostra els còmics favorits
   console.log("Llista de còmics favorits:");
@@ -131,14 +131,13 @@ class Thumbnail {
   myFavorites.removeFavorite(456);
   
   // Mostra la llista actualitzada
-  console.log("\nLlista de còmics favorits després d'eliminar-ne un:");
+  console.log("Llista de còmics favorits després d'eliminar-ne un:");
   myFavorites.showFavorites();
   
   // Copia la llista de favorits
-  const copiedFavorites = myFavorites.copyFavorites();
-  console.log("\nCòpia de la llista de favorits:");
-  console.log(copiedFavorites);
-  
+  const copiedFavorites = copyFavorites(myFavorites.favoriteComics);
+  console.log("Còpia de la llista de favorits:", copiedFavorites);
+
   console.log("Comic Title 1:", sampleComic1.title);
   console.log("Thumbnail URL 1:", sampleComic1.getThumbnailURL());
   
